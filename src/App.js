@@ -13,12 +13,17 @@ function App() {
     let newItem = {Name: newName, DueDate: newDueDate}
     setTodoItems([...todoItems, newItem]);
   }
+  let handleDelete = (item)=>{
+    console.log(item.Name);
+    let newItems = todoItems.filter(olditem => item.Name !== olditem.Name);
+    setTodoItems(newItems);
+  }
   return (
     <div className="container todoBox">
       <Head />
       <AddItem  addItems={addItems}/>
       {todoItems.length===0 &&  <Welcome />}
-      <DisplayItem todoItems={todoItems} />
+      <DisplayItem todoItems={todoItems} onDeleteClick={handleDelete}/>
     </div>
   );
 }

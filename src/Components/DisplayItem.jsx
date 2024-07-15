@@ -1,10 +1,10 @@
 import ItemPrint from "./ItemPrint";
-function DisplayItem({ todoItems }) {
+function DisplayItem({ todoItems, onDeleteClick }) {
   return (
     <>
       <ul>
         {todoItems.map((item) => {
-            return (<ItemPrint item = {item} key={item.Name}/>)
+            return (<ItemPrint item = {item} key={item.Name} onDeleteClick={onDeleteClick}/>)
         }
 )}   
       </ul>
