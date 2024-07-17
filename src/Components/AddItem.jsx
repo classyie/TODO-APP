@@ -12,6 +12,10 @@ function AddItem({addItems}){
     let handleDueDate = (event) => {
         setDueDate(event.target.value);
     }
+    const handleOnSubmit = (event) => {
+        event.preventDefault();
+        handleInput(inputvalue, dueDate);
+    }
     const handleInput = (inputValue, dueDate) => {
         console.log(`Task: ${inputvalue}, Due Date: ${dueDate}`);
         addItems(inputValue, dueDate);
@@ -19,11 +23,11 @@ function AddItem({addItems}){
         setDueDate("");
     }
     return(
-        <div className={`${styles.items} row`}>
+        <form className={`${styles.items} row`} onSubmit={handleOnSubmit}>
             <input type="text" placeholder="Enter your Task" className="col-4" onChange={handleInputValue} value={inputvalue}/>
             <input type="date" className="col-4" onChange={handleDueDate}  value={dueDate} />
-            <button className="col-2 btn btn-success" onClick={() => handleInput(inputvalue, dueDate)}><MdAddShoppingCart /></button>
-        </div>
+            <button className="col-2 btn btn-success" ><MdAddShoppingCart /></button>
+        </form>
     );
 }
 
