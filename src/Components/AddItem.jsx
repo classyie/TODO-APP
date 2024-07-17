@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { MdAddShoppingCart } from "react-icons/md";
 import styles from './AddItem.module.css';
+
 function AddItem({addItems}){
     let [inputvalue, setInputValue] = useState("");
     let [dueDate, setDueDate] = useState("");
@@ -20,7 +22,7 @@ function AddItem({addItems}){
         <div className={`${styles.items} row`}>
             <input type="text" placeholder="Enter your Task" className="col-4" onChange={handleInputValue} value={inputvalue}/>
             <input type="date" className="col-4" onChange={handleDueDate}  value={dueDate} />
-            <button className="col-2 btn btn-success" onClick={() => handleInput(inputvalue, dueDate)}>Add</button>
+            <button className="col-2 btn btn-success" onClick={() => handleInput(inputvalue, dueDate)}><MdAddShoppingCart /></button>
         </div>
     );
 }
