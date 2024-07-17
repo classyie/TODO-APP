@@ -1,31 +1,23 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { MdAddShoppingCart } from "react-icons/md";
 import styles from './AddItem.module.css';
 
 function AddItem({addItems}){
-    let [inputvalue, setInputValue] = useState("");
-    let [dueDate, setDueDate] = useState("");
-    let handleInputValue = (event) => {
-        setInputValue(event.target.value);
-        console.log(event.target.value);
-    }
-    let handleDueDate = (event) => {
-        setDueDate(event.target.value);
-    }
+    const inputValueElement = useRef();
+    const dueDateElement = useRef();
+    
     const handleOnSubmit = (event) => {
         event.preventDefault();
-        handleInput(inputvalue, dueDate);
-    }
-    const handleInput = (inputValue, dueDate) => {
-        console.log(`Task: ${inputvalue}, Due Date: ${dueDate}`);
+        const inputValue = inputValueElement.current.value;
+        const dueDate = dueDateElement.current.value;
         addItems(inputValue, dueDate);
-        setInputValue("");
-        setDueDate("");
+        inputValueElement.current.value = '';
+        dueDateElement.current.value = '';
     }
     return(
         <form className={`${styles.items} row`} onSubmit={handleOnSubmit}>
-            <input type="text" placeholder="Enter your Task" className="col-4" onChange={handleInputValue} value={inputvalue}/>
-            <input type="date" className="col-4" onChange={handleDueDate}  value={dueDate} />
+            <input type="text" placeholder="Enter your Task" className="col-4" ref={inputValueElement} />
+            <input type="date" className="col-4" ref={dueDateElement} />
             <button className="col-2 btn btn-success" ><MdAddShoppingCart /></button>
         </form>
     );
